@@ -1,0 +1,31 @@
+{
+"orders": [
+{
+"order_id": "111",
+"customer_name": "John Carter",
+"product_name": "Summit Pro Camping Tent",
+"product_description": "4-person waterproof family camping tent.",
+"order_date": "2026-06-22",
+"status": "Shipped",
+"active_notes": "Arriving tomorrow"
+},
+{
+"order_id": "222",
+"customer_name": "Emily Johnson",
+"product_name": "TrailMaster Hiking Backpack",
+"product_description": "60L hiking backpack designed for multi-day outdoor adventures.",
+"order_date": "2026-06-23",
+"status": "Processing",
+"active_notes": "Ships in 24 hours"
+},
+{
+"order_id": "333",
+"customer_name": "Michael Anderson",
+"product_name": "Arctic Shield Sleeping Bag",
+"product_description": "All-season sleeping bag suitable for cold-weather camping.",
+"order_date": "2026-06-18",
+"status": "Delivered",
+"active_notes": null
+}
+]
+}

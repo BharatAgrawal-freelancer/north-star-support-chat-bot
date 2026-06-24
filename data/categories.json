@@ -1,0 +1,364 @@
+{
+    "categories": [
+        {
+            "id": "tent",
+            "name": "Camping Tents",
+            "description": "Shelters designed for outdoor camping, backpacking, and family adventures.",
+            "tags": [
+                "tent",
+                "camping",
+                "shelter",
+                "outdoor",
+                "camp"
+            ],
+            "subcategories": [
+                {
+                    "name": "Family Camping Tents",
+                    "description": "Spacious tents designed for groups and families."
+                },
+                {
+                    "name": "Solo Backpacking Tents",
+                    "description": "Lightweight tents designed for individual hikers and backpackers."
+                },
+                {
+                    "name": "Ultralight Tents",
+                    "description": "Compact and lightweight shelters for long-distance trekking."
+                }
+            ]
+        },
+        {
+            "id": "backpack",
+            "name": "Camping Backpacks",
+            "description": "Backpacks designed for hiking, camping, and multi-day outdoor trips.",
+            "tags": [
+                "backpack",
+                "bag",
+                "hiking",
+                "camping",
+                "gear"
+            ],
+            "subcategories": [
+                {
+                    "name": "Day Hiking Backpacks",
+                    "description": "Compact backpacks for short hikes and day trips."
+                },
+                {
+                    "name": "Multi-Day Backpacks",
+                    "description": "Large-capacity backpacks for extended adventures."
+                },
+                {
+                    "name": "Hydration Packs",
+                    "description": "Lightweight packs with integrated water storage."
+                }
+            ]
+        },
+        {
+            "id": "sleeping_bag",
+            "name": "Sleeping Bags",
+            "description": "Sleeping solutions for outdoor comfort and temperature protection.",
+            "tags": [
+                "sleeping bag",
+                "sleep",
+                "camping",
+                "outdoor",
+                "overnight"
+            ],
+            "subcategories": [
+                {
+                    "name": "Summer Sleeping Bags",
+                    "description": "Lightweight sleeping bags for warm-weather camping."
+                },
+                {
+                    "name": "All-Season Sleeping Bags",
+                    "description": "Versatile sleeping bags for most outdoor conditions."
+                },
+                {
+                    "name": "Cold Weather Sleeping Bags",
+                    "description": "Insulated sleeping bags for winter and cold environments."
+                }
+            ]
+        },
+        {
+            "id": "jacket",
+            "name": "Hiking Jackets",
+            "description": "Protective outerwear designed for hiking and outdoor activities.",
+            "tags": [
+                "jacket",
+                "hiking",
+                "rain",
+                "windproof",
+                "outdoor clothing"
+            ],
+            "subcategories": [
+                {
+                    "name": "Rain Jackets",
+                    "description": "Waterproof jackets for wet weather."
+                },
+                {
+                    "name": "Insulated Jackets",
+                    "description": "Warm jackets designed for colder climates."
+                },
+                {
+                    "name": "Windbreakers",
+                    "description": "Lightweight jackets that provide wind protection."
+                }
+            ]
+        },
+        {
+            "id": "footwear",
+            "name": "Outdoor Footwear",
+            "description": "Footwear built for hiking, trekking, and outdoor exploration.",
+            "tags": [
+                "boots",
+                "shoes",
+                "footwear",
+                "hiking",
+                "trekking"
+            ],
+            "subcategories": [
+                {
+                    "name": "Hiking Boots",
+                    "description": "Durable boots for rough terrain and long hikes."
+                },
+                {
+                    "name": "Trail Running Shoes",
+                    "description": "Lightweight shoes for fast-paced outdoor movement."
+                },
+                {
+                    "name": "Waterproof Footwear",
+                    "description": "Shoes and boots designed for wet conditions."
+                }
+            ]
+        },
+        {
+            "id": "camping_accessories",
+            "name": "Camping Accessories",
+            "description": "Essential camping tools and accessories.",
+            "tags": [
+                "accessories",
+                "camping gear",
+                "outdoor tools",
+                "equipment"
+            ],
+            "subcategories": [
+                {
+                    "name": "Lanterns",
+                    "description": "Portable lighting solutions for campsites."
+                },
+                {
+                    "name": "Camping Chairs",
+                    "description": "Portable seating for outdoor use."
+                },
+                {
+                    "name": "Cooking Equipment",
+                    "description": "Portable stoves and outdoor cooking tools."
+                }
+            ]
+        },
+        {
+            "id": "climbing_gear",
+            "name": "Climbing Gear",
+            "description": "Equipment designed for rock climbing, mountaineering, and safety-focused outdoor adventures.",
+            "tags": [
+                "rope",
+                "climbing",
+                "mountain",
+                "harness",
+                "carabiner",
+                "safety"
+            ],
+            "subcategories": [
+                {
+                    "name": "Climbing Ropes",
+                    "description": "Dynamic and static ropes designed for climbing and safety applications."
+                },
+                {
+                    "name": "Harnesses",
+                    "description": "Protective climbing harnesses for secure attachment."
+                },
+                {
+                    "name": "Carabiners",
+                    "description": "Metal connectors used in climbing and rope systems."
+                }
+            ]
+        },
+        {
+            "id": "trekking_equipment",
+            "name": "Trekking Equipment",
+            "description": "Essential gear for long-distance hiking and mountain trekking.",
+            "tags": [
+                "trekking",
+                "hiking",
+                "walking",
+                "trail",
+                "mountain"
+            ],
+            "subcategories": [
+                {
+                    "name": "Trekking Poles",
+                    "description": "Adjustable poles that improve balance and reduce joint strain."
+                },
+                {
+                    "name": "Gaiters",
+                    "description": "Protective coverings that keep debris and moisture out of footwear."
+                },
+                {
+                    "name": "Navigation Tools",
+                    "description": "Compasses, maps, and navigation accessories."
+                }
+            ]
+        },
+        {
+            "id": "water_sports",
+            "name": "Water Adventure Gear",
+            "description": "Equipment designed for outdoor water-based activities and adventures.",
+            "tags": [
+                "water",
+                "kayak",
+                "river",
+                "lake",
+                "adventure"
+            ],
+            "subcategories": [
+                {
+                    "name": "Life Jackets",
+                    "description": "Personal flotation devices for water safety."
+                },
+                {
+                    "name": "Dry Bags",
+                    "description": "Waterproof bags for protecting gear."
+                },
+                {
+                    "name": "Waterproof Storage",
+                    "description": "Protective storage solutions for electronics and valuables."
+                }
+            ]
+        },
+        {
+            "id": "camping_furniture",
+            "name": "Camping Furniture",
+            "description": "Portable furniture designed for outdoor comfort.",
+            "tags": [
+                "chair",
+                "table",
+                "camp",
+                "outdoor furniture"
+            ],
+            "subcategories": [
+                {
+                    "name": "Camping Chairs",
+                    "description": "Portable foldable chairs for campsites."
+                },
+                {
+                    "name": "Camping Tables",
+                    "description": "Compact tables for outdoor dining and activities."
+                },
+                {
+                    "name": "Portable Cots",
+                    "description": "Elevated sleeping platforms for camping."
+                }
+            ]
+        },
+        {
+            "id": "outdoor_clothing",
+            "name": "Outdoor Clothing",
+            "description": "Performance apparel designed for outdoor activities and changing weather conditions.",
+            "tags": [
+                "clothing",
+                "apparel",
+                "shirt",
+                "pants",
+                "outdoor wear"
+            ],
+            "subcategories": [
+                {
+                    "name": "Base Layers",
+                    "description": "Moisture-wicking clothing worn close to the skin."
+                },
+                {
+                    "name": "Hiking Pants",
+                    "description": "Durable outdoor pants designed for trails and trekking."
+                },
+                {
+                    "name": "Thermal Wear",
+                    "description": "Insulating clothing for cold-weather adventures."
+                }
+            ]
+        },
+        {
+            "id": "camping_cooking",
+            "name": "Camping Cooking Gear",
+            "description": "Portable cooking equipment for outdoor food preparation.",
+            "tags": [
+                "stove",
+                "cook",
+                "camp kitchen",
+                "outdoor cooking"
+            ],
+            "subcategories": [
+                {
+                    "name": "Portable Stoves",
+                    "description": "Compact cooking systems for campsites."
+                },
+                {
+                    "name": "Cookware Sets",
+                    "description": "Lightweight pots, pans, and utensils."
+                },
+                {
+                    "name": "Camping Coffee Gear",
+                    "description": "Outdoor coffee-making equipment."
+                }
+            ]
+        },
+        {
+            "id": "lighting",
+            "name": "Outdoor Lighting",
+            "description": "Lighting solutions for campsites and outdoor activities.",
+            "tags": [
+                "light",
+                "lantern",
+                "flashlight",
+                "headlamp"
+            ],
+            "subcategories": [
+                {
+                    "name": "Lanterns",
+                    "description": "Area lighting for campsites."
+                },
+                {
+                    "name": "Headlamps",
+                    "description": "Hands-free lighting for hiking and camping."
+                },
+                {
+                    "name": "Flashlights",
+                    "description": "Portable directional lighting tools."
+                }
+            ]
+        },
+        {
+            "id": "survival_gear",
+            "name": "Survival Gear",
+            "description": "Emergency and preparedness equipment for outdoor situations.",
+            "tags": [
+                "survival",
+                "emergency",
+                "first aid",
+                "safety"
+            ],
+            "subcategories": [
+                {
+                    "name": "First Aid Kits",
+                    "description": "Medical supplies for emergencies."
+                },
+                {
+                    "name": "Emergency Shelters",
+                    "description": "Compact shelters for unexpected situations."
+                },
+                {
+                    "name": "Fire Starters",
+                    "description": "Tools designed for reliable fire ignition."
+                }
+            ]
+        }
+    ]
+}

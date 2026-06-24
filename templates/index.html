@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>North Star Support Bot</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="chat-container">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-content">
+                <div class="header-title">
+                    <i class="fas fa-compass"></i>
+                    <span>North Star Support</span>
+                </div>
+                <div class="header-status">
+                    <span class="status-indicator"></span>
+                    <span>Online</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chat Box -->
+        <div id="chat-box" class="chat-box"></div>
+
+        <!-- Quick Reply Tags (Initial) -->
+        <div id="quick-tags" class="quick-tags-container">
+            <div class="tags-header">
+                <span>How can we help?</span>
+            </div>
+            <div class="tags-wrapper">
+                <button class="quick-tag" onclick="sendQuickTag('Order Tracking')">
+                    <i class="fas fa-box"></i>
+                    <span>Order Tracking</span>
+                </button>
+                <button class="quick-tag" onclick="sendQuickTag('Returns & Exchanges')">
+                    <i class="fas fa-undo"></i>
+                    <span>Returns & Exchanges</span>
+                </button>
+                <button class="quick-tag" onclick="sendQuickTag('Product Recommendations')">
+                    <i class="fas fa-star"></i>
+                    <span>Product Recommendations</span>
+                </button>
+                <button class="quick-tag" onclick="sendQuickTag('Shipping Information')">
+                    <i class="fas fa-truck"></i>
+                    <span>Shipping Information</span>
+                </button>
+                <button class="quick-tag" onclick="sendQuickTag('Live Agent Support')">
+                    <i class="fas fa-headset"></i>
+                    <span>Live Agent Support</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Input Area -->
+        <div class="input-area">
+            <input
+                type="text"
+                id="user-input"
+                placeholder="Type your message or choose an option above..."
+                onkeypress="handleKeyPress(event)"
+            >
+            <button class="send-button" onclick="sendMessage()">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Hidden Elements for Dynamic Content -->
+    <div id="order-input-container" class="hidden-container"></div>
+    <div id="product-tags-container" class="hidden-container"></div>
+    <div id="agent-name-display" class="hidden-container"></div>
+
+    <script>
+        const agentNames = [
+            "Sarah Johnson",
+            "Michael Chen",
+            "Emma Williams",
+            "David Martinez",
+            "Lisa Anderson",
+            "James Thompson",
+            "Nicole Brown",
+            "Robert Taylor"
+        ];
+
+        const productCategories = [
+            "Tents",
+            "Backpacks",
+            "Sleeping Bags",
+            "Jackets",
+            "Footwear",
+            "Climbing Gear",
+            "Camping Accessories"
+        ];
+
+        function getCurrentTime() {
+            const now = new Date();
+            return now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        }
+
+        function showTypingIndicator() {
+            const chatBox = document.getElementById("chat-box");
+            const typingDiv = document.createElement("div");
+            typingDiv.className = "bot-message typing-indicator";
+            typingDiv.id = "typing-indicator";
+            typingDiv.innerHTML = `
+                <div class="typing-dots">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            `;
+            chatBox.appendChild(typingDiv);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        function removeTypingIndicator() {
+            const typingIndicator = document.getElementById("typing-indicator");
+            if (typingIndicator) {
+                typingIndicator.remove();
+            }
+        }
+
+        function hideQuickTags() {
+            const quickTags = document.getElementById("quick-tags");
+            quickTags.style.display = "none";
+        }
+
+        function showQuickTags(tags = null) {
+            const chatBox = document.getElementById("chat-box");
+            const tagsContainer = document.createElement("div");
+            tagsContainer.className = "dynamic-tags-container";
+            
+            const tagsToShow = tags || productCategories;
+            let tagsHTML = '<div class="tags-wrapper">';
+            
+            tagsToShow.forEach(tag => {
+                tagsHTML += `
+                    <button class="quick-tag" onclick="sendTaggedMessage('${tag}')">
+                        <i class="fas fa-arrow-right"></i>
+                        <span>${tag}</span>
+                    </button>
+                `;
+            });
+            
+            tagsHTML += '</div>';
+            tagsContainer.innerHTML = tagsHTML;
+            chatBox.appendChild(tagsContainer);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        function showOrderInput() {
+            const chatBox = document.getElementById("chat-box");
+            const inputContainer = document.createElement("div");
+            inputContainer.className = "dynamic-input-container";
+            inputContainer.innerHTML = `
+                <div class="input-prompt">
+                    <label>Enter your order number:</label>
+                    <div class="order-input-wrapper">
+                        <input type="text" id="order-number-input" placeholder="e.g., ORD-123456" class="order-input">
+                        <button onclick="submitOrderNumber()" class="order-submit-btn">
+                            <i class="fas fa-check"></i>
+                        </button>
+                    </div>
+                </div>
+            `;
+            chatBox.appendChild(inputContainer);
+            chatBox.scrollTop = chatBox.scrollHeight;
+            
+            setTimeout(() => {
+                document.getElementById("order-number-input").focus();
+            }, 100);
+        }
+
+        function submitOrderNumber() {
+            const orderInput = document.getElementById("order-number-input");
+            const orderNumber = orderInput.value.trim();
+            
+            if (orderNumber) {
+                const chatBox = document.getElementById("chat-box");
+                const container = chatBox.querySelector(".dynamic-input-container");
+                if (container) {
+                    container.remove();
+                }
+                sendMessage(orderNumber);
+            }
+        }
+
+        function getRandomAgent() {
+            return agentNames[Math.floor(Math.random() * agentNames.length)];
+        }
+
+        function showAgentTransfer(agentName) {
+            const chatBox = document.getElementById("chat-box");
+            const agentContainer = document.createElement("div");
+            agentContainer.className = "agent-transfer-container";
+            agentContainer.innerHTML = `
+                <div class="agent-card">
+                    <div class="agent-avatar">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    <div class="agent-info">
+                        <div class="agent-label">Connected with</div>
+                        <div class="agent-name">${agentName}</div>
+                    </div>
+                </div>
+            `;
+            chatBox.appendChild(agentContainer);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        function sendQuickTag(tag) {
+            const input = document.getElementById("user-input");
+            input.value = tag;
+            hideQuickTags();
+            sendMessage();
+        }
+
+        function sendTaggedMessage(tag) {
+            const input = document.getElementById("user-input");
+            input.value = `I need ${tag} for my outdoor traveling`;
+            sendMessage();
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === "Enter") {
+                sendMessage();
+            }
+        }
+
+        async function sendMessage(customMessage = null) {
+            const input = document.getElementById("user-input");
+            const chatBox = document.getElementById("chat-box");
+
+            const message = customMessage || input.value.trim();
+
+            if (!message) return;
+
+            // Add user message with timestamp
+            const userMessageDiv = document.createElement("div");
+            userMessageDiv.className = "user-message-wrapper";
+            userMessageDiv.innerHTML = `
+                <div class="user-message">
+                    ${escapeHtml(message)}
+                </div>
+                <div class="message-timestamp">${getCurrentTime()}</div>
+            `;
+            chatBox.appendChild(userMessageDiv);
+
+            input.value = "";
+            chatBox.scrollTop = chatBox.scrollHeight;
+
+            // Show typing indicator
+            showTypingIndicator();
+
+            try {
+                const response = await fetch("/chat", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        message: message
+                    })
+                });
+
+                const data = await response.json();
+                removeTypingIndicator();
+
+                // Add bot message with timestamp
+                const botMessageDiv = document.createElement("div");
+                botMessageDiv.className = "bot-message-wrapper";
+                botMessageDiv.innerHTML = `
+                    <div class="bot-message">
+                        ${escapeHtml(data.response)}
+                    </div>
+                    <div class="message-timestamp">${getCurrentTime()}</div>
+                `;
+                chatBox.appendChild(botMessageDiv);
+
+                // Handle conditional UI changes
+                if (data.response.includes("Please provide your order number")) {
+                    showOrderInput();
+                } else if (data.response.includes("Are you looking for tents, backpacks, sleeping bags")) {
+                    showQuickTags(productCategories);
+                } else if (data.response.includes("I'm transferring you to a Live Agent")) {
+                    const agentName = getRandomAgent();
+                    showAgentTransfer(agentName);
+                }
+
+                chatBox.scrollTop = chatBox.scrollHeight;
+            } catch (error) {
+                removeTypingIndicator();
+                console.error("Error:", error);
+                const errorDiv = document.createElement("div");
+                errorDiv.className = "bot-message-wrapper error";
+                errorDiv.innerHTML = `
+                    <div class="bot-message">
+                        Sorry, something went wrong. Please try again.
+                    </div>
+                    <div class="message-timestamp">${getCurrentTime()}</div>
+                `;
+                chatBox.appendChild(errorDiv);
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+    </script>
+</body>
+</html>
