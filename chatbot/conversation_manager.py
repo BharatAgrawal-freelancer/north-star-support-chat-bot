@@ -1,148 +1,89 @@
 from chatbot.response_engine import get_response
-from services.order_service import get_order
 
-from services.recommendation_service import (
-    detect_category,
-    find_best_subcategory
+from chatbot.order_flow import handle_order_tracking
+
+from chatbot.recommendation_flow import (
+    ask_activity,
+    ask_weather,
+    handle_recommendation
 )
 
+from services.recommendation_service import detect_activity
+
+
 conversation_state = "MAIN_MENU"
-selected_category = None
+selected_activity = None
 
 
 def process_message(user_message):
 
     global conversation_state
-    global selected_category
-
-    print("\n" + "=" * 50)
-    print("NEW MESSAGE:", user_message)
-    print("CURRENT STATE:", conversation_state)
-    print("SELECTED CATEGORY:", selected_category)
-    print("=" * 50)
+    global selected_activity
 
     # -----------------------------
-    # ORDER TRACKING FLOW
+    # ORDER FLOW
     # -----------------------------
     if conversation_state == "WAITING_FOR_ORDER_ID":
 
-        print("INSIDE ORDER TRACKING FLOW")
+        conversation_state = "MAIN_MENU"
 
-        order = get_order(user_message)
-
-        print("ORDER FOUND:", order)
-
-        if order:
-
-            conversation_state = "MAIN_MENU"
-
-            status = order["status"]
-            notes = order["active_notes"]
-
-            print("STATE RESET TO:", conversation_state)
-
-            if status == "Delivered":
-
-                return (
-                    f"Order #{order['order_id']} has been delivered.\n\n"
-                    "Did you receive the package successfully?"
-                )
-
-            return (
-                f"Order #{order['order_id']} status: {status}\n"
-                f"Update: {notes}"
-            )
-
-        return (
-            "I couldn't find that order number. "
-            "Please verify it and try again."
-        )
+        return handle_order_tracking(user_message)
 
     # -----------------------------
-    # PRODUCT RECOMMENDATION FLOW
+    # ACTIVITY
     # -----------------------------
-    if conversation_state == "WAITING_FOR_REQUIREMENTS":
+    if conversation_state == "WAITING_FOR_ACTIVITY":
 
-        print("INSIDE REQUIREMENTS FLOW")
+        activity = detect_activity(user_message)
 
-        recommendation = find_best_subcategory(
-            selected_category,
-            user_message
-        )
+        if not activity:
 
-        print("RECOMMENDATION RESULT:")
-        print(recommendation)
+           return (
+    "I'd be happy to recommend the right outdoor gear.\n\n"
+    "To get started, please select your planned activity:\n\n"
+    "• Hiking\n"
+    "• Camping\n"
+    "• Climbing"
+)
+
+        selected_activity = activity["activity"]
+
+        conversation_state = "WAITING_FOR_WEATHER"
+
+        return ask_weather()
+
+    # -----------------------------
+    # WEATHER
+    # -----------------------------
+    if conversation_state == "WAITING_FOR_WEATHER":
 
         conversation_state = "MAIN_MENU"
 
-        print("STATE RESET TO:", conversation_state)
-
-        if recommendation:
-
-            return (
-                f"Based on your requirements, "
-                f"I recommend our "
-                f"{recommendation['name']} category.\n\n"
-                f"{recommendation['description']}"
-            )
-
-        return (
-            "I couldn't find an exact match.\n"
-            "Could you provide a little more detail?"
+        return handle_recommendation(
+            selected_activity,
+            user_message
         )
 
     # -----------------------------
     # NORMAL INTENT DETECTION
     # -----------------------------
-    print("RUNNING INTENT DETECTION")
-
     result = get_response(user_message)
-
-    print("INTENT RESULT:")
-    print(result)
 
     # ORDER TRACKING
     if result["intent"] == "order_tracking":
 
         conversation_state = "WAITING_FOR_ORDER_ID"
 
-        print("STATE CHANGED TO:", conversation_state)
-
         return result["response"]
 
     # PRODUCT RECOMMENDATION
-    if result["intent"] == "specific_recommendation":
+    if result["intent"] in (
+    "general_recommendation",
+    "specific_recommendation"
+):
 
-        category = detect_category(user_message)
+        conversation_state = "WAITING_FOR_ACTIVITY"
 
-        print("CATEGORY DETECTED:")
-        print(category)
-
-        if category:
-
-            selected_category = category
-
-            conversation_state = "WAITING_FOR_REQUIREMENTS"
-
-            print("SELECTED CATEGORY SET:")
-            print(selected_category["name"])
-
-            print("STATE CHANGED TO:")
-            print(conversation_state)
-
-            return (
-                f"Sure. I'd be happy to help with "
-                f"{category['name']}.\n\n"
-                f"Could you tell me more about your requirements?"
-            )
-
-        return (
-            "What type of outdoor product are you looking for?\n\n"
-            "Examples:\n"
-            "- Tent\n"
-            "- Backpack\n"
-            "- Sleeping Bag\n"
-            "- Hiking Jacket"
-        )
+        return ask_activity()
 
     return result["response"]

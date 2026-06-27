@@ -276,8 +276,8 @@
                 botMessageDiv.className = "bot-message-wrapper";
                 botMessageDiv.innerHTML = `
                     <div class="bot-message">
-                        ${escapeHtml(data.response)}
-                    </div>
+    ${formatBotMessage(data.response)}
+</div>
                     <div class="message-timestamp">${getCurrentTime()}</div>
                 `;
                 chatBox.appendChild(botMessageDiv);
@@ -309,7 +309,15 @@
             }
         }
 
-        function escapeHtml(text) {
+       function formatBotMessage(text) {
+    const div = document.createElement("div");
+    div.textContent = text;
+
+    // Escape HTML and preserve new lines
+    return div.innerHTML.replace(/\n/g, "<br>");
+}
+
+ function escapeHtml(text) {
             const div = document.createElement('div');
             div.textContent = text;
             return div.innerHTML;

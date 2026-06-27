@@ -1,50 +1,46 @@
 import json
-
-with open("data/categories.json", "r") as file:
-    CATEGORIES = json.load(file)["categories"]
+import os
 
 
-def detect_category(user_message):
+BASE_DIR = os.path.dirname(__file__)
+
+DATA_PATH = os.path.join(
+    BASE_DIR,
+    "..",
+    "data",
+    "activities.json"
+)
+
+with open(DATA_PATH, "r") as file:
+    ACTIVITIES = json.load(file)["activities"]
+
+
+def detect_activity(user_message):
 
     message = user_message.lower()
 
-    for category in CATEGORIES:
+    for activity in ACTIVITIES:
 
-        for tag in category["tags"]:
+        if activity["activity"].lower() in message:
 
-            if tag.lower() in message:
-                return category
+            return activity
 
     return None
 
 
-def find_best_subcategory(category, user_requirement):
+def get_recommendation(activity_name, weather):
 
-    requirement = user_requirement.lower()
+    activity_name = activity_name.lower()
+    weather = weather.lower()
 
-    best_match = None
-    best_score = 0
+    for activity in ACTIVITIES:
 
-    for subcategory in category["subcategories"]:
+        if activity["activity"].lower() == activity_name:
 
-        score = 0
+            return (
+                activity["weather"]
+                .get(weather, {})
+                .get("recommendations")
+            )
 
-        text = (
-            subcategory["name"] +
-            " " +
-            subcategory["description"]
-        ).lower()
-
-        words = requirement.split()
-
-        for word in words:
-
-            if word in text:
-                score += 1
-
-        if score > best_score:
-
-            best_score = score
-            best_match = subcategory
-
-    return best_match
+    return None

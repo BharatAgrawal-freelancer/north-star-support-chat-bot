@@ -300,10 +300,10 @@
         "I got the wrong product",
         "The item is faulty",
         "This order has a problem",
-        "I need to return a damaged item"
+        "I need to. return a damaged item"
       ],
       "responses": [
-        "We offer 30-day returns for unused items in their original packaging. Would you like the returns link?"
+         "You can start your return or exchange here:\nhttps://northstar.com/returns\n\nOur policy allows returns within 30 days for unused items in their original packaging.\n\nIs there anything else I can help you with?\n\n1. Order Tracking\n2. Returns & Exchanges\n3. Product Recommendations\n4. Shipping Information\n5. Live Agent Support"
       ]
     },
    {
@@ -391,7 +391,7 @@
   "What are the best hiking essentials"
   ],
   "responses": [
-    "I'd be happy to help. Are you looking for tents, backpacks, sleeping bags, jackets, footwear, climbing gear, or camping accessories?"
+    "What is Your Intent? Are you looking for camping gear, hiking gear, or something else? Please specify your outdoor activity so I can provide the best recommendations."
   ]
 },
 {
@@ -441,7 +441,7 @@
     
   ],
   "responses": [
-    "Sure. I'd be happy to help. Could you tell me more about your requirements?"
+    "SWhat is Your Intent? Are you looking for camping gear, hiking gear, or something else? Please specify your outdoor activity so I can provide the best recommendations."
   ]
 },
     {

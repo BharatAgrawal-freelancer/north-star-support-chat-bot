@@ -1,0 +1,91 @@
+{
+  "activities": [
+    {
+      "activity": "camping",
+      "weather": {
+        "cold": {
+          "recommendations": [
+            "4-Season Tent",
+            "Cold Weather Sleeping Bag",
+            "Insulated Jacket",
+            "Waterproof Hiking Boots"
+          ]
+        },
+        "warm": {
+          "recommendations": [
+            "Family Camping Tent",
+            "Summer Sleeping Bag",
+            "Camping Backpack",
+            "Lightweight Hiking Shoes"
+          ]
+        },
+        "rainy": {
+          "recommendations": [
+            "Waterproof Tent",
+            "Rain Jacket",
+            "Dry Bag",
+            "Waterproof Footwear"
+          ]
+        }
+      }
+    },
+    {
+      "activity": "hiking",
+      "weather": {
+        "cold": {
+          "recommendations": [
+            "Insulated Jacket",
+            "Thermal Base Layer",
+            "Hiking Boots",
+            "Multi-Day Backpack"
+          ]
+        },
+        "warm": {
+          "recommendations": [
+            "Trail Running Shoes",
+            "Hydration Pack",
+            "Lightweight Windbreaker",
+            "Sun Hat"
+          ]
+        },
+        "rainy": {
+          "recommendations": [
+            "Rain Jacket",
+            "Waterproof Hiking Boots",
+            "Backpack Rain Cover",
+            "Trekking Poles"
+          ]
+        }
+      }
+    },
+    {
+      "activity": "climbing",
+      "weather": {
+        "cold": {
+          "recommendations": [
+            "Insulated Jacket",
+            "Climbing Gloves",
+            "Mountaineering Boots",
+            "Helmet"
+          ]
+        },
+        "warm": {
+          "recommendations": [
+            "Climbing Shoes",
+            "Breathable Shirt",
+            "Helmet",
+            "Chalk Bag"
+          ]
+        },
+        "rainy": {
+          "recommendations": [
+            "Waterproof Shell Jacket",
+            "Waterproof Boots",
+            "Dry Rope Bag",
+            "Helmet"
+          ]
+        }
+      }
+    }
+  ]
+}

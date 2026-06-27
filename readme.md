@@ -200,7 +200,7 @@ Training workflow:
 
 Generated files:
 
-model/chatbot_model.keras
+model/saved_model/
 
 model/classes.pkl
 
@@ -424,7 +424,7 @@ data/
  ├── orders.json
 
 model/
- ├── chatbot_model.keras
+ ├── saved_model/
  ├── classes.pkl
  ├── words.pkl
 
