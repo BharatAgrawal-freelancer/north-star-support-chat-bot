@@ -2,7 +2,7 @@ from services.recommendation_service import get_recommendation
 
 
 def ask_activity():
-
+ #this is some of the cahnges that i have done 
     return (
     "I'd be happy to recommend the right outdoor gear.\n\n"
     "To get started, please select your planned activity:\n\n"
@@ -42,3 +42,5 @@ def handle_recommendation(activity, weather):
     "I've returned you to the main menu.\n"
     "How else can I assist you today?"
     )
+
+    
